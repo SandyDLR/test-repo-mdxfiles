@@ -1,10 +1,152 @@
 ---
-title: "Getting Started"
-description: "Learn the basics of this product."
+title: "PagerDuty MDX Parser Compatibility Test"
+description: "Test extraction and round-trip preservation of real PagerDuty MDX structures."
+section: ai-automation
+subsection: aiops
+source_url: https://support.pagerduty.com/main/docs/event-orchestration
+migrated: true
+slug: pagerduty-parser-test
+status: published
 ---
 
-# Getting Started
+# PagerDuty MDX parser compatibility test
 
-Welcome to our documentation. Follow these steps to begin.
+> This test combines representative markup and short excerpts found in the three supplied PagerDuty MDX files. It is not a complete PagerDuty article. A few short lines are reduced for test isolation; the heading-ID test and explicit escaped-brace test are illustrative additions.
 
-You can **save changes** at any time.
+## TEST 01: Frontmatter values
+
+Only `title` and `description` should be translated. `section`, `subsection`, `source_url`, `migrated`, `slug`, and `status` should remain unchanged.
+
+## TEST 02: Legacy Callout
+
+<Callout icon="⚠️" theme="warn" title="Required User Permissions">
+  The following user roles can create/edit/delete Event Orchestrations:
+
+  - User
+  - Admin
+  - Global Admin
+</Callout>
+
+## TEST 03: Current Callout and Markdown link
+
+<Callout type="info" title="How Do I Page Someone?">
+To page someone, [trigger or declare an incident](#triggerdeclare-an-incident) on the relevant service.
+</Callout>
+
+## TEST 04: Nested AccordionGroup, Accordion and Callout
+
+<AccordionGroup>
+  <Accordion summary="Trigger an Incident via Integration">
+    It is a common workflow to integrate with a third-party platform to trigger an incident in PagerDuty.
+    <Callout type="info" title="Event Orchestration">
+      [Event Orchestration](/ai-automation/aiops/event-orchestration) centralizes your integrations.
+    </Callout>
+  </Accordion>
+  <Accordion summary="How should I troubleshoot a rule that did not work as expected?" id="how-should-i-troubleshoot-a-rule-that-did-not-work-as-expected" variant="faq">
+    **Ensure the expected action is supported.**
+  </Accordion>
+</AccordionGroup>
+
+## TEST 05: Image with user-facing attributes
+
+<Image src="/images/kb/b6c3efde615e6dd6b40025115381c18338abe7a20e1790d8a2ffdc83e3455223-timeline.webp" alt="Incident timeline" align="center" width="50%" caption="Incident timeline" />
+
+## TEST 06: JSX expression attribute in Table
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th>Custom field to set</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Incident priority</td>
+      <td>Set the priority for the incident.</td>
+    </tr>
+  </tbody>
+</Table>
+
+## TEST 07: Inline icons inside a translatable sentence
+
+1. Navigate to **AIOps** <ArrowRight /> **Event Orchestration** and select **+ New Orchestration**.
+2. Navigate to **Integrations** <ArrowRight /> **API Access Keys** and click **Create New API Key**.
+
+## TEST 08: HTML br tags in a Markdown table
+
+| Field | Description |
+| --- | --- |
+| Impacted Service | Select the impacted service for the incident.<br /><br />**Note:** Impacted service is optional by default. |
+| Description | Enter an incident description. |
+
+## TEST 09: Titled shell code fence (unchanged)
+
+```shell credentials.pdrunner-creds
+id:XXXXXXXXXXXXXXXXXXXXXXX3P1C
+secret:XXXXXXXXXXXXXXXXXXXX2I4B
+token:<PagerDuty_API_TOKEN>
+rundeck_url: http://localhost:4440
+rundeck_token: <Your_Saved_PagerDuty_Process_Automation_API_TOKEN>
+```
+
+## TEST 10: Template-like variables inside a code fence (unchanged)
+
+```shell
+id:${RUNNER_ID}
+secret:${RUNNER_SECRET}
+token:${RUNNER_PDTOKEN}
+rundeck_url:${RUNNER_CLOUD_RDKCLIENT_URL}
+rundeck_token:${RUNNER_CLOUD_RDKCLIENT_TOKEN}
+```
+
+## TEST 11: JSON code fence and its language line (unchanged)
+
+```json
+{
+  "__pd_metadata": {
+    "alert": {
+      "id": "Q3HPU6SIHHN1PF"
+    }
+  }
+}
+```
+
+## TEST 12: Mustache expressions in prose
+
+You can reference a variable using `{{ }}` brackets, for example `{{class}}`, in the **Replace with value** field.
+
+## TEST 13: Escaped braces in prose (illustrative)
+
+Enter \{service name\} when creating a service template. Keep \{service name\} unchanged.
+
+## TEST 14: Heading ID and internal link
+
+[Jump to the incident section](#triggerdeclare-an-incident).
+
+### Trigger/Declare an Incident
+
+Trigger or declare an incident on the relevant service.
+
+## TEST 15: Raw HTML anchor and line break (illustrative)
+
+Read <a href="/incident-management/incidents/overview" target="_blank">the incident overview</a> before continuing.<br />Then return to this page.
+
+## TEST 16: Markdown image and emphasized caption
+
+![Incident timeline](/images/kb/b6c3efde615e6dd6b40025115381c18338abe7a20e1790d8a2ffdc83e3455223-timeline.webp)
+
+*Incident timeline*
+
+## TEST 17: Nested numbered list
+
+1. Create a new API key.
+   1. Choose an access level.
+   2. Save the key.
+2. Configure the Runner.
+
+## TEST 18: JSX component attribute with JS expression (illustrative)
+
+<Callout type="info" title={"Read the integration instructions"}>
+  Review the instructions before starting.
+</Callout>
